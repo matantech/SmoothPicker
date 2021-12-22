@@ -173,7 +173,10 @@ extension SmoothPickerView :SmoothPickerScrollDelegate {
         currentSelectedIndex = index
         (selectedCell as? SmoothPickerCollectionViewCell)?.setSelected(selected: true)
         if didEndDragging {
-            self.delegate?.didSelectItem(index: index, view:((selectedCell as? SmoothPickerCollectionViewCell)?.view)!, pickerView: self)
+            if let cell = selectedCell as? SmoothPickerCollectionViewCell, let cellView = cell.view
+            {
+                self.delegate?.didSelectItem(index: index, view: cellView, pickerView: self)
+            }
         }
     }
     public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
